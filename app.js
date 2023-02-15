@@ -3,28 +3,25 @@ let min = 1,
   winningNum = getRandomNum(min, max),
   guessesLeft = 3;
 
-const game = document.querySelector("#game"),
-  minNum = document.querySelector(".min-num"),
-  maxNum = document.querySelector(".max-num"),
-  guessBtn = document.querySelector("#guess-btn"),
-  guessInput = document.querySelector("#guess-input"),
-  message = document.querySelector(".message");
+const game = document.querySelector('#game'),
+  minNum = document.querySelector('.min-num'),
+  maxNum = document.querySelector('.max-num'),
+  guessBtn = document.querySelector('#guess-btn'),
+  guessInput = document.querySelector('#guess-input'),
+  message = document.querySelector('.message');
 
 minNum.textContent = min;
 maxNum.textContent = max;
 
-game.addEventListener("mousedown", function (e) {
-  if (e.target.className === "play-again") {
+game.addEventListener('mousedown', (e) => {
+  if (e.target.className === 'play-again') {
     window.location.reload();
   }
 });
 
-guessBtn.addEventListener("click", function () {
+guessBtn.addEventListener('click', () => {
   let guess = parseInt(guessInput.value);
 
-  if (isNaN(guess) || guess < min || guess > max) {
-    setMessage(`Please enter a number between ${min} and ${max}`, "red");
-  }
   if (guess === winningNum) {
     gameOver(true, `${winningNum} is correct, YOU WIN!`);
   } else {
@@ -35,23 +32,26 @@ guessBtn.addEventListener("click", function () {
         `Game Over, you lost, The correct number was ${winningNum}`
       );
     } else {
-      guessInput.style.borderColor = "red";
-      guessInput.value = "";
-      setMessage(`${guess} is not correct, ${guessesLeft} guesses left`, "red");
+      guessInput.style.borderColor = 'red';
+      guessInput.value = '';
+      setMessage(`${guess} is not correct, ${guessesLeft} guesses left`, 'red');
+    }
+    if (guessInput.value === '') {
+      setMessage(`Please enter a number between ${min} and ${max}`, 'red');
     }
   }
 });
 
 function gameOver(won, msg) {
   let color;
-  won === true ? (color = "green") : (color = "red");
+  won === true ? (color = 'green') : (color = 'red');
   guessInput.disabled = true;
   guessInput.style.borderColor = color;
   message.style.color = color;
   setMessage(msg);
 
-  guessBtn.value = "Play Again";
-  guessBtn.className += "play-again";
+  guessBtn.value = 'Play Again';
+  guessBtn.className += 'play-again';
 }
 
 function getRandomNum(min, max) {
