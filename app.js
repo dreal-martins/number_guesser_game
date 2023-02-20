@@ -33,7 +33,6 @@ guessBtn.addEventListener('click', () => {
       );
     } else {
       guessInput.style.borderColor = 'red';
-      guessInput.value = '';
       setMessage(`${guess} is not correct, ${guessesLeft} guesses left`, 'red');
     }
     if (guessInput.value === '') {
